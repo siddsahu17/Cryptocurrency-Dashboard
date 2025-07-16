@@ -30,8 +30,6 @@ project_root/
 │   │   ├── chat.py
 │   │   └── forecast.py
 │   ├── requirements.txt
-│   └── utils/
-│       └── summarizer.py
 └── README.md
 ```
 
