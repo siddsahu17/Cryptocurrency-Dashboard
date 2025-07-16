@@ -3,10 +3,13 @@ from fastapi.responses import JSONResponse
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+import os
 
 router = APIRouter()
 
-API_KEY = "SjXJiXGw0yKTyDrZM_nOU8e3rKhOcqfa"  # Replace with your key
+# API_KEY = "SjXJiXGw0yKTyDrZM_nOU8e3rKhOcqfa"  # Replace with your key
+API_KEY = os.getenv("polygon_api_key")  # Replace with your key
 
 @router.get("/api/price")
 def get_crypto_price(response: Response, symbol: str = Query("X:BTCUSD"), interval: str = Query("minute")):

@@ -2,3 +2,8 @@ fastapi
 uvicorn
 requests
 pandas
+langchain
+openai
+pinecone-client
+python-dotenv
+statsmodels
