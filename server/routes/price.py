@@ -26,7 +26,9 @@ def get_crypto_price(response: Response, symbol: str = Query("X:BTCUSD"), interv
     df = pd.DataFrame(data["results"])
     if df.empty:
         return {"data": []}
+    if "t" not in df.columns:
+        return JSONResponse(status_code=500, content={"error": "Timestamp column 't' missing in data."})
     df["t"] = pd.to_datetime(df["t"], unit="ms")
     df.rename(columns={"t": "time", "o": "open", "h": "high", "l": "low", "c": "close", "v": "volume"}, inplace=True)
-    result = df[["time", "open", "high", "low", "close", "volume"]].to_dict(orient="records")
+    result = df.to_dict(orient="records")
     return {"data": result}

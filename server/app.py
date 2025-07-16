@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routes.price import router as price_router
+from routes.price import router as price_router
+from routes.news import router as news_router
 
 app = FastAPI()
 
@@ -13,3 +14,4 @@ app.add_middleware(
 )
 
 app.include_router(price_router)
+app.include_router(news_router)
