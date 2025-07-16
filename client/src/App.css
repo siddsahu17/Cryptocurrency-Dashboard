@@ -119,81 +119,121 @@ body, .container {
   flex-direction: row;
   min-height: 100vh;
   background: #181a20;
+  gap: 3.5rem;
 }
 .dashboard-left {
   flex: 2;
-  padding: 2rem 2rem 2rem 3rem;
+  padding: 4rem 2.5rem 4rem 5rem;
   background: #181a20;
   min-width: 0;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .dashboard-right {
   flex: 1;
-  padding: 2rem 2rem 2rem 1rem;
+  padding: 4rem 2.5rem 4rem 2.5rem;
   background: #23272f;
-  min-width: 320px;
+  min-width: 340px;
   border-left: 1px solid #222;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (max-width: 1200px) {
+  .dashboard-root {
+    gap: 1.5rem;
+  }
+  .dashboard-left {
+    max-width: 100vw;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .candlestick-single {
+    max-width: 98vw;
+    min-width: 0;
+    padding: 1.5rem 0.5rem 1rem 0.5rem;
+  }
+  .dashboard-right {
+    padding: 2rem 1rem 2rem 1rem;
+  }
 }
 @media (max-width: 900px) {
   .dashboard-root {
     flex-direction: column;
+    gap: 0.5rem;
   }
   .dashboard-left, .dashboard-right {
     padding: 1rem;
     min-width: 0;
+    max-width: 100vw;
   }
   .dashboard-right {
     border-left: none;
     border-top: 1px solid #222;
   }
+  .candlestick-single {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .main-heading {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.7rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-bottom: 2.7rem;
   letter-spacing: 1px;
 }
 .crypto-title {
   text-align: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
 }
 .dropdown-row {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 1.2rem;
+  margin-bottom: 2.7rem;
   justify-content: center;
 }
 .crypto-dropdown {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 7px;
   border: 1px solid #444;
   background: #23272f;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.08rem;
 }
 .candlestick-single {
-  background: #23272f;
-  border-radius: 12px;
-  padding: 2rem 1rem 1.5rem 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-  margin: 0 auto;
-  max-width: 600px;
+  background: #23242b;
+  border-radius: 18px;
+  padding: 3.5rem 3rem 2.5rem 3rem;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.13);
+  margin: 0 auto 3.5rem auto;
+  max-width: 900px;
+  min-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1.5px solid #23272f;
 }
 .price-volume-block {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.2rem;
 }
 .pv-label {
-  font-size: 1.1rem;
+  font-size: 1.13rem;
   color: #bbb;
 }
 .pv-value {
-  font-size: 2rem;
+  font-size: 2.1rem;
   font-weight: bold;
   color: #fff;
 }
@@ -240,4 +280,160 @@ body, .container {
 .news-link:hover {
   text-decoration: underline;
   color: #fff;
+}
+
+.news-card-fixed {
+  min-height: 260px;
+  max-width: 440px;
+  margin: 2.5rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  background: #23242b;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.13);
+  padding: 2.2rem 1.7rem 1.7rem 1.7rem;
+  border: 1.5px solid #23272f;
+}
+.news-nav-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.news-nav-btn {
+  background: #23272f;
+  color: #ffd166;
+  border: 1.5px solid #ffd166;
+  border-radius: 7px;
+  padding: 0.6rem 1.4rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.news-nav-btn:hover:not(:disabled) {
+  background: #ffd166;
+  color: #23272f;
+}
+.news-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.news-nav-index {
+  color: #fff;
+  font-size: 1.13rem;
+  font-weight: 500;
+  min-width: 60px;
+  text-align: center;
+}
+/* Ensure Plotly plot is always visible and not squished */
+.candlestick-single .js-plotly-plot {
+  min-height: 520px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #181a20;
+}
+.app-header, .app-footer {
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 1.2rem 0;
+  background: #181a20;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.app-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 4rem 0 2rem 0;
+  box-sizing: border-box;
+  background: #181a20;
+}
+.main-left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  margin-top: 2.5rem;
+}
+.main-dataviz, .main-dataviz-inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 340px;
+  margin-top: 2.5rem;
+}
+.main-summarizer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.news-card-fixed {
+  margin-top: 1.5rem;
+  padding: 2.5rem 2rem 2rem 2rem;
+  min-width: 340px;
+  max-width: 480px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.news-image-placeholder {
+  width: 100%;
+  max-width: 340px;
+  height: 160px;
+  background: #222;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #444;
+  font-size: 1.3rem;
+  font-weight: 600;
+  object-fit: cover;
+  overflow: hidden;
+}
+@media (max-width: 1200px) {
+  .app-main {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem 0 1rem 0;
+  }
+  .main-left, .main-right {
+    width: 100%;
+    min-width: 0;
+  }
+  .main-summarizer {
+    margin-top: 0;
+  }
 }

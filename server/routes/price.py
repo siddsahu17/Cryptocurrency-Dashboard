@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 router = APIRouter()
 
-API_KEY = "Z9nJVv8cOxoaJZI55yR5ZzLQsmZaBgyn"  # Replace with your key
+API_KEY = "SjXJiXGw0yKTyDrZM_nOU8e3rKhOcqfa"  # Replace with your key
 
 @router.get("/api/price")
 def get_crypto_price(response: Response, symbol: str = Query("X:BTCUSD"), interval: str = Query("minute")):
@@ -18,8 +18,16 @@ def get_crypto_price(response: Response, symbol: str = Query("X:BTCUSD"), interv
 
     url = f"https://api.polygon.io/v2/aggs/ticker/{symbol}/range/1/{interval}/{from_str}/{to_str}?apiKey={API_KEY}&limit=100"
     r = requests.get(url)
+    # Debug logging
+    print(f"Polygon API URL: {url}")
+    print(f"Polygon API status: {r.status_code}, response: {r.text}")
     if r.status_code != 200:
-        return JSONResponse(status_code=500, content={"error": "Failed to fetch data from Polygon.io"})
+        try:
+            err_json = r.json()
+            err_msg = err_json.get("error", r.text)
+        except Exception:
+            err_msg = r.text
+        return JSONResponse(status_code=500, content={"error": f"Failed to fetch data from Polygon.io: {err_msg}"})
     data = r.json()
     if "results" not in data:
         return JSONResponse(status_code=404, content={"error": "No data found"})
